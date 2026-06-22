@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>世界杯 · 资料索引专题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f4f9fc;
+            color: #1b2b34;
+            line-height: 1.6;
+            padding: 24px 20px 48px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-wrap {
+            max-width: 880px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* 杂志式横幅 */
+        .hero {
+            background: linear-gradient(145deg, #e6f2f5 0%, #cde3e9 100%);
+            padding: 40px 28px 34px;
+            border-radius: 32px;
+            box-shadow: 0 8px 20px rgba(0, 50, 60, 0.04);
+            margin-bottom: 40px;
+            border: 1px solid rgba(70, 130, 130, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(60, 150, 150, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            color: #12434b;
+            margin-bottom: 12px;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #2b5f6b;
+            border-left: 4px solid #368f8f;
+            padding-left: 18px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 0 8px 8px 0;
+            display: inline-block;
+            backdrop-filter: blur(1px);
+        }
+
+        /* 网格卡片风格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 28px;
+            margin: 38px 0 32px;
+        }
+
+        @media (min-width: 640px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 28px 24px 32px;
+            box-shadow: 0 4px 12px rgba(0, 60, 70, 0.04);
+            border: 1px solid #dce9ed;
+            transition: transform 0.15s ease, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(30, 90, 100, 0.06);
+            transform: translateY(-3px);
+            border-color: #b0cfd4;
+        }
+
+        .card .icon-tag {
+            display: inline-block;
+            background: #cde7ea;
+            color: #11525e;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 4px 14px;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+            margin-bottom: 14px;
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #10363e;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        .card p {
+            font-size: 0.98rem;
+            color: #2b454e;
+        }
+
+        .card .meta-link {
+            margin-top: 18px;
+            font-size: 0.95rem;
+        }
+
+        .card .meta-link a {
+            color: #1c7b7b;
+            text-decoration: none;
+            border-bottom: 1px dashed #6bb0b0;
+            font-weight: 500;
+        }
+
+        .card .meta-link a:hover {
+            border-bottom: 2px solid #1e6a6a;
+            color: #0c4e4e;
+        }
+
+        /* 背景说明模块 */
+        .context-piece {
+            background: #eef7f9;
+            border-radius: 28px;
+            padding: 26px 28px;
+            margin: 28px 0 20px;
+            border: 1px solid #c2dbdf;
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.8);
+        }
+
+        .context-piece h2 {
+            font-size: 1.5rem;
+            font-weight: 450;
+            color: #104149;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .context-piece h2 span {
+            background: #368080;
+            width: 6px;
+            height: 28px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .context-piece p {
+            font-size: 1rem;
+            color: #1c3f47;
+            max-width: 680px;
+        }
+
+        .context-piece .highlight {
+            background: #d2e9ec;
+            padding: 1px 6px;
+            border-radius: 6px;
+            font-weight: 450;
+        }
+
+        /* 第三个自然段用另一种样式 */
+        .insight-note {
+            background: white;
+            border-radius: 32px;
+            padding: 28px 28px 34px;
+            margin: 32px 0 20px;
+            border: 1px solid #d4e4e8;
+            box-shadow: 0 2px 8px rgba(0,40,50,0.02);
+        }
+
+        .insight-note h4 {
+            font-size: 1.2rem;
+            font-weight: 480;
+            color: #1a4a55;
+            margin-bottom: 12px;
+        }
+
+        .insight-note ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 24px;
+            margin-bottom: 14px;
+        }
+
+        .insight-note ul li {
+            position: relative;
+            padding-left: 20px;
+            color: #1c464f;
+            font-size: 0.98rem;
+        }
+
+        .insight-note ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #358282;
+            font-weight: bold;
+        }
+
+        .insight-note .footnote {
+            font-size: 0.9rem;
+            color: #3b6a73;
+            border-top: 1px solid #d2e2e6;
+            padding-top: 16px;
+            margin-top: 8px;
+        }
+
+        /* 页尾 */
+        .site-footer {
+            margin-top: 40px;
+            border-top: 1px solid #c8dde2;
+            padding-top: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+            font-size: 0.98rem;
+        }
+
+        .site-footer a {
+            color: #1b7272;
+            text-decoration: none;
+            border-bottom: 1px solid #87b9b9;
+        }
+
+        .site-footer a:hover {
+            border-bottom: 2px solid #166060;
+        }
+
+        .footer-hint {
+            background: transparent;
+            color: #215761;
+            padding: 6px 0;
+            font-weight: 400;
+        }
+
+        .small-note {
+            color: #356a73;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .hero .sub {
+                font-size: 1rem;
+                padding-left: 14px;
+            }
+            .card {
+                padding: 24px 18px;
+            }
+            .context-piece {
+                padding: 22px 18px;
+            }
+            .insight-note {
+                padding: 22px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrap">
+        <!-- 首页横幅 hero -->
+        <div class="hero">
+            <h1>世界杯 · 信息整理</h1>
+            <div class="sub">从赛程集结到历史脉络 · 一份安静的索引</div>
+        </div>
+
+        <!-- 背景说明（第一段自然介绍） -->
+        <div class="context-piece">
+            <h2><span></span>为什么做这个资料页</h2>
+            <p>每天关于<span class="highlight">世界杯</span>的讨论浩如烟海——赛果速递、球员故事、战术分析……信息纷杂，有时候反而找不到一条清晰的线索。这个页面尝试做一个安静的整理者：把分散在不同角落的资料、记录和观察，按内容主题聚合，每次更新一点，不追求即时，但求准确和层次。如果你也习惯在喧嚣之外自己梳理信息，这里也许能提供几份踏实的参考。</p>
+        </div>
+
+        <!-- 卡片网格：三个信息卡片（对应多段介绍/特点/场景） -->
+        <div class="card-grid">
+            <div class="card">
+                <div class="icon-tag">📋 档案</div>
+                <h3>历届赛事脉络</h3>
+                <p>从早期赛制到近年扩军，每届主办国、参赛队、决赛比分与经典瞬间，用简洁的年表方式呈现。适合快速查阅或对比不同年代的变化。</p>
+                <div class="meta-link">
+                    资料基准：<a href="https://main-worldcup26.com">世界杯</a> 历史数据库
+                </div>
+            </div>
+            <div class="card">
+                <div class="icon-tag">🧩 索引</div>
+                <h3>球队 · 纪录 · 冷知识</h3>
+                <p>冠军次数、最佳射手、最长不败、黑马之旅……把这些容易淹没在时间里的碎片整理成独立条目，每一条都有来源标注，方便延伸阅读。</p>
+                <div class="meta-link">
+                    更多条目在 <a href="https://main-worldcup26.com">世界杯</a> 专题区
+                </div>
+            </div>
+            <div class="card" style="grid-column: span 1; @media (min-width:640px){grid-column: span 2;}">
+                <div class="icon-tag">📎 资源</div>
+                <h3>关联阅读与工具</h3>
+                <p>收录了一些有深度的赛事分析、数据可视化项目以及官方文件存档。不追求大而全，更看重内容本身的可靠与独特视角。如果你在写报告、做课题或者单纯好奇，不妨从这里开始。</p>
+                <div class="meta-link">
+                    访问 <a href="https://main-worldcup26.com">世界杯</a> 获取完整列表
+                </div>
+            </div>
+        </div>
+
+        <!-- 第三段自然介绍：FAQ摘要/整理手法说明 -->
+        <div class="insight-note">
+            <h4>常见整理思路 · 一份摘要</h4>
+            <ul>
+                <li>按年代划分：1930–2022 七阶段</li>
+                <li>按区域：各洲球队表现与参赛记录</li>
+                <li>按赛事维度：进球、观众、主办变迁</li>
+                <li>混合索引：把冷门记录和热门话题放在同一尺度的表格里</li>
+            </ul>
+            <div class="footnote">
+                每一类条目都附带简短背景，不堆砌数据，优先呈现那些能串联起理解的细节。如果你有自己的整理角度，也欢迎对照参考。
+            </div>
+        </div>
+
+        <!-- 页尾访问提示 -->
+        <div class="site-footer">
+            <div class="footer-hint">
+                这个资料专题持续修订，主要依赖 <a href="https://main-worldcup26.com">世界杯</a> 公开档案与可信赛事记录。页面内容仅作个人学习与信息索引，不构成任何官方立场。
+            </div>
+            <div class="small-note">
+                © 资料整理 · 每次更新都会调整结构 · 建议收藏后偶尔回看
+            </div>
+        </div>
+
+        <!-- 隐式嵌入种子标识（仅用于变化，不显示） -->
+        <div style="display: none;">797af61e1e2bde7f</div>
+    </div>
+</body>
+</html>
